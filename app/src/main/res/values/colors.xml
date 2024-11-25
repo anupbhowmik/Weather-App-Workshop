@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bg">#000313</color>
     <color name="paragraphSecondary">#94A3B8</color>
+    <color name="bgCard">#1A1D2E</color>
 </resources>

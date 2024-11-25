@@ -37,9 +37,12 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    implementation libs.swiperefreshlayout
 
-    def lottieVersion = "3.4.0"
-    implementation "com.airbnb.android:lottie:$lottieVersion"
+    implementation libs.lottie
+
+    implementation libs.retrofit
+    implementation libs.converter.gson
+    implementation libs.logging.interceptor
 
 }
