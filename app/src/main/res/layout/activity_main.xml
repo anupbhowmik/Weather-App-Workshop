@@ -82,13 +82,14 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="64sp"
-                        android:text="28"/>
+                        tools:text="28"/>
 
                     <TextView
+                        android:id="@+id/tv_feels_like"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/paragraphSecondary"
-                        android:text="Feels like 26"/>
+                        tools:text="Feels like 26"/>
 
                 </LinearLayout>
 
@@ -127,7 +128,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:text="5 km/h"
+                    tools:text="5 km/h"
                     android:layout_gravity="center_horizontal" />
 
                 <TextView
