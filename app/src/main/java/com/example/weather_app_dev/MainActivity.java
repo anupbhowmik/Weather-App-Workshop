@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView tempText, windText, tvFeelsLike, tvCondition, tvDate;
+    private TextView tempText, windText, humidityText, rainText, cloudText, tvFeelsLike, tvCondition, tvDate;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
     private void initializeViews() {
         tempText = findViewById(R.id.tv_temp);
         windText = findViewById(R.id.tv_wind);
+        humidityText = findViewById(R.id.tv_humidity);
+        rainText = findViewById(R.id.tv_rain);
+        cloudText = findViewById(R.id.tv_cloud);
         tvFeelsLike = findViewById(R.id.tv_feels_like);
         tvCondition = findViewById(R.id.tv_condition);
         tvDate = findViewById(R.id.tv_date);
@@ -68,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
                             WeatherData currentWeather = new WeatherData();
                             currentWeather.tempC = current.getDouble("temp_c");
                             currentWeather.windKph = current.getDouble("wind_kph");
+                            currentWeather.humidity = current.getDouble("humidity");
+                            currentWeather.rain = current.getDouble("precip_mm");
+                            currentWeather.cloud = current.getDouble("cloud");
                             currentWeather.feelslike = current.getDouble("feelslike_c");
                             currentWeather.condition = current.getJSONObject("condition").getString("text");
                             updateUI(currentWeather);
@@ -90,6 +96,9 @@ public class MainActivity extends AppCompatActivity {
     private void updateUI(WeatherData current) {
         tempText.setText(((int) current.tempC) + "°C");
         windText.setText(current.windKph + " km/h");
+        humidityText.setText(current.humidity + "%");
+        rainText.setText(current.rain + " mm");
+        cloudText.setText(current.cloud + "%");
         tvFeelsLike.setText("Feels like " + ((int) current.feelslike) + "°C");
         tvCondition.setText(current.condition);
     }
