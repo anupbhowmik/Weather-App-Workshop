@@ -16,9 +16,12 @@ import com.example.weather_app_dev.model.WeatherData;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
-    private String API_KEY="1395bcc1916947dea8e80728242411";
-    private TextView tempText, windText, tvFeelsLike;
+    private TextView tempText, windText, tvFeelsLike, tvCondition, tvDate;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
@@ -41,13 +44,19 @@ public class MainActivity extends AppCompatActivity {
         tempText = findViewById(R.id.tv_temp);
         windText = findViewById(R.id.tv_wind);
         tvFeelsLike = findViewById(R.id.tv_feels_like);
+        tvCondition = findViewById(R.id.tv_condition);
+        tvDate = findViewById(R.id.tv_date);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+
+        String currentDate = new SimpleDateFormat("EEE, d MMMM", Locale.getDefault()).format(new Date());
+        tvDate.setText(currentDate);
     }
 
     public void fetchWeatherData() {
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String location = "London";
+        String location = "Dhaka";
+        String API_KEY = "1395bcc1916947dea8e80728242411";
         String url = "https://api.weatherapi.com/v1/current.json?key=" + API_KEY + "&q=" + location;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -56,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONObject current = response.getJSONObject("current");
-                            WeatherData.Current currentWeather = new WeatherData.Current();
+                            WeatherData currentWeather = new WeatherData();
                             currentWeather.tempC = current.getDouble("temp_c");
                             currentWeather.windKph = current.getDouble("wind_kph");
                             currentWeather.feelslike = current.getDouble("feelslike_c");
@@ -78,10 +87,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void updateUI(WeatherData.Current current) {
+    private void updateUI(WeatherData current) {
         tempText.setText(((int) current.tempC) + "°C");
         windText.setText(current.windKph + " km/h");
         tvFeelsLike.setText("Feels like " + ((int) current.feelslike) + "°C");
+        tvCondition.setText(current.condition);
     }
 
     private void showError(String message) {
