@@ -1,4 +1,4 @@
-# Weather App Dev
+# Weather App Workshop
 
 ## Libraries
 - [Weather API](https://www.weatherapi.com/)
